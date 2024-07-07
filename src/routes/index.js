@@ -23,5 +23,6 @@ router.get('/', async (req, res) => {
 });
 
 router.use('/auth', require('../authentication'));
+router.use('/admin', require('./questions'));
 
 module.exports = router;
