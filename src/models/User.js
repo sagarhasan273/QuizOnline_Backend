@@ -24,7 +24,11 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    quizzes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quiz',
+    }]
 });
 
 UserSchema.index({ userType: 1, email: 1 }, { unique: true });
