@@ -4,14 +4,14 @@ const Quiz = require('../models/Quiz');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/quizzes', async (req, res) => {
     try{
-        const quizzes = await Quiz.find();
+        const quizzes = await Quiz.find().sort({ startDateTime: -1 }).limit(10);
         return res.json({ data: quizzes, status: true, message: 'All Quizzes.'});
-    } catch (error){
+    } catch (error) {
         return res.json({ status: false, message: 'All quizzes fetch issue.'});
     }
-})
+});
 
 router.post('/add', async (req, res) => {
     try {
@@ -21,13 +21,6 @@ router.post('/add', async (req, res) => {
         const end = moment(endDateTime).format('YYYY-MM-DD HH:mm');
         
         const newQuiz = new Quiz({
-            title,
-            description,
-            startDateTime: start,
-            endDateTime: end,
-        });
-
-        console.log({
             title,
             description,
             startDateTime: start,
